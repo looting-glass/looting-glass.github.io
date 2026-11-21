@@ -8,10 +8,12 @@ The website for Looting Glass, the Path of Exile price checker:
 - `style.css`: colours from the app's KDE look
 
 Screenshots and the icon live in the app repos. `scripts/fetch-images.sh` downloads them into
-`img/` (git-ignored). Preview locally with:
+`img/` (git-ignored). `scripts/build.py` builds the site into `_site/` (git-ignored), adding the
+changelog and pointing the download buttons at the latest release's files. Preview locally with:
 
 ```bash
-scripts/fetch-images.sh && python3 -m http.server 8765
+scripts/fetch-images.sh && scripts/build.py && python3 -m http.server -d _site 8765
 ```
 
-Pushing to `main` deploys the site; a weekly run picks up new screenshots from the app repos.
+Pushing to `main` deploys the site; a weekly run picks up new screenshots and releases from the app
+repos. Start a run by hand (`gh workflow run Pages`) to show a new release right away.
