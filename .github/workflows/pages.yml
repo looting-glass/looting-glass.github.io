@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v7
       - run: scripts/fetch-images.sh
       - name: Collect the site
-        run: mkdir _site && cp -r index.html android.html style.css img _site/
+        run: mkdir _site && cp -r index.html android.html style.css lightbox.js img _site/
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:
