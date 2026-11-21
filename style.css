@@ -206,7 +206,7 @@ footer p { margin: 4px 0; }
 .lightbox button {
   position: fixed; display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
   border-radius: 50%; border: 1px solid var(--line-strong); background: rgba(34, 34, 48, 0.9);
-  color: var(--text); font: 22px/1 inherit; cursor: pointer;
+  color: var(--text); font-family: inherit; line-height: 1; cursor: pointer;
 }
 .lightbox button:hover { border-color: var(--link); }
 .lb-close { top: 14px; right: 14px; font-size: 18px; }
@@ -218,4 +218,20 @@ footer p { margin: 4px 0; }
   .lightbox img { max-height: calc(100vh - 136px); }
   .lightbox figcaption { display: none; }
   .lb-prev, .lb-next { top: auto; bottom: 14px; transform: none; }
+}
+
+/* Copy buttons on code blocks (copy.js). */
+.code { position: relative; }
+.code pre { padding-right: 84px; }
+.copy {
+  position: absolute; top: 8px; right: 8px;
+  padding: 3px 10px; border-radius: 6px; border: 1px solid var(--line-strong);
+  background: var(--raised); color: var(--muted);
+  font-family: inherit; font-size: 12px; font-weight: 600; line-height: 1.6; cursor: pointer;
+}
+.copy:hover { color: var(--text); border-color: var(--link); }
+.copy.done { color: #fff; background: var(--accent); border-color: var(--accent); }
+/* Phones: long commands scroll sideways, so the button gets its own row above them. */
+@media (max-width: 600px) {
+  .code pre { padding-right: 16px; padding-top: 40px; }
 }
