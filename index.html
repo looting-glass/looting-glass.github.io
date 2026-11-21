@@ -23,6 +23,7 @@
     <a href="#usage">Usage</a>
     <a href="#settings">Settings</a>
     <a href="#troubleshooting">Troubleshooting</a>
+    <a href="#changelog">Changelog</a>
   </nav>
   <nav class="links" aria-label="Other pages">
     <a href="android.html">Android</a>
@@ -84,7 +85,8 @@
 
 <section id="install" class="block">
   <h2>Install</h2>
-  <p class="intro">Downloads are on the <a href="https://github.com/looting-glass/desktop/releases/latest">latest release</a> page.</p>
+  <p class="intro">The download buttons get the latest release<span class="version" data-version></span>. Checksums and
+    older versions are on <a href="https://github.com/looting-glass/desktop/releases">GitHub releases</a>.</p>
 
   <div class="cards">
     <article class="card">
@@ -92,7 +94,10 @@
       <p>Needs KDE Plasma 6 on Wayland and Qt 6. On Arch / CachyOS, install the runtime libraries
         (already there on most Plasma desktops):</p>
       <pre><code>sudo pacman -S --needed qt6-declarative layer-shell-qt kirigami qqc2-desktop-style</code></pre>
-      <p>Download <code>lootingglass-&lt;version&gt;-x86_64.tar.gz</code>, then:</p>
+      <div class="cta">
+        <a class="button primary" href="https://github.com/looting-glass/desktop/releases/latest" data-asset="x86_64.tar.gz">Download for Linux <span class="size" data-size="x86_64.tar.gz"></span></a>
+      </div>
+      <p>Then, in the folder you downloaded it to:</p>
       <pre><code>tar xzf lootingglass-*-x86_64.tar.gz
 cd lootingglass-*-x86_64
 ./install.sh</code></pre>
@@ -111,9 +116,13 @@ makepkg -si</code></pre>
 
     <article class="card">
       <h3>Windows <span class="tag tag-poc">experimental</span></h3>
-      <p>Run <code>lootingglass-&lt;version&gt;-windows-x64-setup.exe</code>. It installs for your user only (no admin
-        rights), adds a Start menu entry, can start with Windows and uninstalls from <em>Settings → Apps</em>.
-        Prefer a portable app? Extract the <code>.zip</code> anywhere and run <code>lootingglass.exe</code>.</p>
+      <div class="cta">
+        <a class="button primary" href="https://github.com/looting-glass/desktop/releases/latest" data-asset="windows-x64-setup.exe">Download installer <span class="size" data-size="windows-x64-setup.exe"></span></a>
+        <a class="button" href="https://github.com/looting-glass/desktop/releases/latest" data-asset="windows-x64.zip">Portable .zip <span class="size" data-size="windows-x64.zip"></span></a>
+      </div>
+      <p>The installer sets it up for your user only (no admin rights), adds a Start menu entry, can start with
+        Windows and uninstalls from <em>Settings → Apps</em>. For the portable version, extract the <code>.zip</code>
+        anywhere and run <code>lootingglass.exe</code>.</p>
       <p>The downloads aren't code-signed yet, so SmartScreen may warn you: click <em>More info → Run anyway</em>.
         Run the game in <strong>windowed fullscreen</strong>; Windows can't draw the overlay over exclusive fullscreen.</p>
     </article>
@@ -214,6 +223,13 @@ price_check = "Ctrl+D"</code></pre>
     <dd>Run <code>RUST_LOG=lootingglass=debug QT_FORCE_STDERR_LOGGING=1 lootingglass</code> in a terminal, and
       <a href="https://github.com/looting-glass/desktop/issues">open an issue</a> with what it prints.</dd>
   </dl>
+</section>
+
+<section id="changelog" class="block">
+  <h2>Changelog</h2>
+  <p class="intro">The app tells you when a new version is out. Every release, with checksums, is on
+    <a href="https://github.com/looting-glass/desktop/releases">GitHub releases</a>.</p>
+<!-- releases -->
 </section>
 
 </main>

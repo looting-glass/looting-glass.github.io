@@ -1,7 +1,8 @@
 name: Pages
 
 # Publishes the site to https://looting-glass.github.io/. Screenshots and the icon are fetched
-# from the desktop and android repos at deploy time; the weekly run picks up new screenshots.
+# from the desktop and android repos at deploy time; the changelog and the download links come
+# from their releases. The weekly run picks up new screenshots and releases.
 on:
   workflow_dispatch:
   push:
@@ -27,8 +28,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - run: scripts/fetch-images.sh
-      - name: Collect the site
-        run: mkdir _site && cp -r index.html android.html style.css lightbox.js copy.js img _site/
+      - run: scripts/build.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:

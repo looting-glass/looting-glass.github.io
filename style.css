@@ -161,6 +161,9 @@ tbody tr:nth-child(even) { background: rgba(226, 226, 236, 0.05); }
 .button:hover { border-color: var(--link); }
 .button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
 .button.primary:hover { background: #9666b3; }
+.button .size { font-weight: 400; opacity: 0.75; }
+.button .size:not(:empty)::before { content: "· "; }
+.version:not(:empty)::before { content: ", "; }
 .fine { color: var(--muted); font-size: 14px; }
 
 footer { border-top: 1px solid var(--line); margin-top: 80px; padding: 32px 16px 48px; color: var(--muted); font-size: 14px; text-align: center; }
@@ -238,3 +241,34 @@ footer p { margin: 4px 0; }
 .copy.done { color: #7ec27e; border-color: rgba(126, 194, 126, 0.5); }
 .copy.done .icon { display: none; }
 .copy.done .check { display: block; }
+
+/* Changelog sections, filled in from the GitHub releases by scripts/build.py: a timeline with
+   the newest release on top. */
+.timeline { list-style: none; margin: 0; padding: 0 0 0 30px; max-width: 760px; position: relative; }
+.timeline::before { content: ""; position: absolute; left: 6px; top: 10px; bottom: 10px; width: 2px; background: var(--line); }
+.release { position: relative; padding-bottom: 28px; }
+.release::before {
+  content: ""; position: absolute; left: -30px; top: 7px; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--page); border: 2px solid var(--accent);
+}
+.release:has(.rel-latest)::before { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.release h3 { font-size: 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin-bottom: 10px; }
+.release h3 a { color: var(--text); text-decoration: none; }
+.release h3 a:hover { color: var(--link); }
+.release time { color: var(--muted); font-size: 14px; font-weight: 400; }
+.rel-latest {
+  padding: 1px 9px; border-radius: 6px; font-size: 12px; font-weight: 600;
+  background: var(--accent-soft); border: 1px solid rgba(136, 89, 164, 0.45); color: var(--link);
+}
+.release h4 {
+  margin: 14px 0 6px; color: var(--link); font-size: 12px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.release ul { margin: 0; padding-left: 18px; }
+.release li { margin-bottom: 4px; }
+.release li::marker { color: var(--accent); }
+.release li a { color: var(--muted); }
+.release li a:hover { color: var(--link); }
+.older { max-width: 760px; }
+.older summary { cursor: pointer; color: var(--link); margin: 0 0 20px 30px; width: fit-content; }
+.older summary:hover { color: var(--text); }
