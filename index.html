@@ -75,11 +75,15 @@
     <li><h3>Both games, one app</h3><p>Switch game from the tray, the settings or a hotkey. Each game remembers its own league.</p></li>
     <li><h3>A proper overlay</h3><p>On the game's screen, always on top. Drag the ⠿ handle to move it, its edges to resize it, and pin it to keep it open.</p></li>
     <li><h3>Results at a glance</h3><p>Price, item level, listing age and seller, an online/any toggle, and one click to the full search on pathofexile.com.</p></li>
+    <li><h3>Mod tiers</h3><p>With advanced item text (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd>) every mod shows its tier and roll range, like "T2 · 50–59", with top-tier rolls highlighted.</p></li>
+    <li><h3>Bulk exchange</h3><p>Next to the poe.ninja average, the cheapest offers on the trade site's bulk exchange right now, with stock and the price per unit.</p></li>
+    <li><h3>Map check <span class="tag tag-poc">PoE 1</span></h3><p>A separate hotkey lists a map's mods and colours the ones you marked as deadly or annoying, so you know before you run it.</p></li>
     <li><h3>Manual check</h3><p>Paste item text from a friend or a forum post into a native window and check it without the hotkey.</p></li>
   </ul>
   <div class="shots-wide">
     <img src="img/desktop/settings-game.png" alt="Settings: game and league per game" width="760" height="440" loading="lazy">
     <img src="img/desktop/manual-check.png" alt="Manual price check window with pasted item text" width="760" height="440" loading="lazy">
+    <img src="img/desktop/map-check.png" alt="Map check: a map's mods with deadly and annoying ones marked" width="380" height="442" loading="lazy">
   </div>
 </section>
 
@@ -156,6 +160,11 @@ cd looting-glass
   <p>Click the tray icon (or <em>Manual check…</em> in its menu), paste the item text and press <strong>Check price</strong>
     or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>. The results open in the overlay as usual.</p>
 
+  <h3 class="sub">Map check <span class="tag tag-poc">PoE 1</span></h3>
+  <p>Assign the <em>Map check</em> shortcut, hover a map and press it. The overlay lists the map's mods: click one to mark it
+    annoying, again for deadly, and once more to clear it. Marks cover every roll of a mod, so the next map with a mod you can't
+    run shows it in red right away. <em>Settings → Maps</em> lists the marks; <em>Settings → Game</em> turns the check off.</p>
+
   <h3 class="sub">Shortcuts</h3>
   <table>
     <thead><tr><th>Action</th><th>Default</th></tr></thead>
@@ -165,6 +174,8 @@ cd looting-glass
       <tr><td>Open settings</td><td class="muted">unassigned</td></tr>
       <tr><td>Open manual price check</td><td class="muted">unassigned</td></tr>
       <tr><td>Hide overlay</td><td class="muted">unassigned</td></tr>
+      <tr><td>Open hovered item on poedb or the wiki</td><td class="muted">unassigned</td></tr>
+      <tr><td>Map check: hovered map's mods</td><td class="muted">unassigned</td></tr>
     </tbody>
   </table>
   <p>On KDE, change them in <em>System Settings → Shortcuts → Looting Glass</em>. On Windows, type them into
@@ -174,8 +185,8 @@ cd looting-glass
   <p>Hyprland doesn't let apps choose their own keys, so bind them in <code>hyprland.conf</code>:</p>
   <pre><code>bind = CTRL, D, global, dev.lootingglass.LootingGlass:price-check
 bind = , F7, global, dev.lootingglass.LootingGlass:toggle-game     # optional</code></pre>
-  <p>The shortcut ids are <code>price-check</code>, <code>toggle-game</code>, <code>settings</code>, <code>manual-check</code>
-    and <code>hide-overlay</code>. If a bind does nothing, <code>hyprctl globalshortcuts</code> shows the names your portal registered.</p>
+  <p>The shortcut ids are <code>price-check</code>, <code>toggle-game</code>, <code>settings</code>, <code>manual-check</code>,
+    <code>hide-overlay</code>, <code>item-info</code> and <code>map-check</code>. If a bind does nothing, <code>hyprctl globalshortcuts</code> shows the names your portal registered.</p>
 </section>
 
 <section id="settings" class="block">
@@ -194,7 +205,13 @@ league = "Standard"
 [trade]
 status = "online"        <span class="c"># "online", "any", or "securable" (PoE 2 instant buyout)</span>
 stat_tolerance = 10      <span class="c"># % below your roll used as the filter minimum</span>
+min_from_tier = false    <span class="c"># with Ctrl+Alt+C text: minimum = bottom of the mod's tier range</span>
 max_results = 20
+
+[map_check]              <span class="c"># PoE 1 maps</span>
+enabled = true
+deadly = ["Monsters reflect #% of Elemental Damage"]   <span class="c"># mod text, numbers as #</span>
+annoying = []
 
 [overlay]
 side = "right"

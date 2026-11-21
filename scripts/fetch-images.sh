@@ -5,7 +5,7 @@ set -eu
 cd "$(dirname "$0")/.."
 raw=https://raw.githubusercontent.com/looting-glass
 mkdir -p img/desktop img/android
-for f in poe1-rare poe1-currency poe2-rare poe2-currency settings-game manual-check; do
+for f in poe1-rare poe1-currency poe2-rare poe2-currency settings-game manual-check map-check; do
   curl -fsSL -o "img/desktop/$f.png" "$raw/desktop/main/docs/screenshots/$f.png"
 done
 for f in item filters listings; do
