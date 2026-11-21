@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Looting Glass</title>
+<meta name="description" content="Price check Path of Exile 1 and 2 items with a native overlay for Linux and Windows, or from your phone with the Android app.">
+<meta property="og:title" content="Looting Glass">
+<meta property="og:description" content="Price check Path of Exile 1 and 2 items, on your PC or from your phone.">
+<meta property="og:image" content="img/desktop/poe1-rare.png">
+<link rel="icon" href="img/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#top"><img src="img/icon.svg" alt="" width="28" height="28"> Looting Glass</a>
+  <nav class="menu" aria-label="Sections">
+    <a href="#features">Features</a>
+    <a href="#install">Install</a>
+    <a href="#usage">Usage</a>
+    <a href="#settings">Settings</a>
+    <a href="#troubleshooting">Troubleshooting</a>
+  </nav>
+  <nav class="links" aria-label="Other pages">
+    <a href="android.html">Android</a>
+    <a class="gh" href="https://github.com/looting-glass/desktop" aria-label="Looting Glass on GitHub" title="Source on GitHub">
+      <svg viewBox="0 0 16 16" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+    </a>
+  </nav>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <img class="hero-icon" src="img/icon.svg" alt="" width="96" height="96">
+  <h1>What is it worth?</h1>
+  <p class="lead">Hover an item in <strong>Path of Exile 1</strong> or <strong>Path of Exile 2</strong>, press a hotkey,
+    and Looting Glass shows live listings from the official trade site and poe.ninja prices on top of the game.
+    Native Rust and Qt: no Electron, no browser.</p>
+  <div class="cta center">
+    <a class="button primary" href="#install">Install</a>
+    <a class="button" href="android.html">On console? Use your phone</a>
+  </div>
+  <p class="fine">KDE Plasma on Wayland is the tested platform. Windows and Hyprland are experimental.</p>
+</section>
+
+<div class="shots-pair">
+  <figure class="group">
+    <figcaption>Path of Exile</figcaption>
+    <div class="shots">
+      <img src="img/desktop/poe1-rare.png" alt="PoE 1 rare boots with editable stat filters and trade listings" width="376" height="888">
+      <img src="img/desktop/poe1-currency.png" alt="PoE 1 Divine Orb with its poe.ninja value" width="376" height="556">
+    </div>
+  </figure>
+  <figure class="group">
+    <figcaption>Path of Exile 2</figcaption>
+    <div class="shots">
+      <img src="img/desktop/poe2-rare.png" alt="PoE 2 rare item with editable stat filters and trade listings" width="376" height="876">
+      <img src="img/desktop/poe2-currency.png" alt="PoE 2 currency with its poe.ninja value" width="376" height="556">
+    </div>
+  </figure>
+</div>
+
+<section id="features" class="block">
+  <h2>Features</h2>
+  <ul class="features">
+    <li><h3>Any item</h3><p>Uniques by name, rares and magic items by their mods, plus gems, currency, fragments, divination cards and more.</p></li>
+    <li><h3>Editable filters</h3><p>Every matched mod has a checkbox and min/max values, pre-filled from your roll minus a tolerance. The search re-runs as you edit.</p></li>
+    <li><h3>poe.ninja prices</h3><p>Currency, fragments, essences, scarabs, runes, omens and other stackables, with the 7-day trend and the value of the whole stack.</p></li>
+    <li><h3>Fair comparisons</h3><p>Armour, evasion, energy shield and physical DPS are compared at 20% quality, like the trade site. Weapons get DPS, attack speed and crit filters.</p></li>
+    <li><h3>Both games, one app</h3><p>Switch game from the tray, the settings or a hotkey. Each game remembers its own league.</p></li>
+    <li><h3>A proper overlay</h3><p>On the game's screen, always on top. Drag the ⠿ handle to move it, its edges to resize it, and pin it to keep it open.</p></li>
+    <li><h3>Results at a glance</h3><p>Price, item level, listing age and seller, an online/any toggle, and one click to the full search on pathofexile.com.</p></li>
+    <li><h3>Manual check</h3><p>Paste item text from a friend or a forum post into a native window and check it without the hotkey.</p></li>
+  </ul>
+  <div class="shots-wide">
+    <img src="img/desktop/settings-game.png" alt="Settings: game and league per game" width="760" height="440" loading="lazy">
+    <img src="img/desktop/manual-check.png" alt="Manual price check window with pasted item text" width="560" height="430" loading="lazy">
+  </div>
+</section>
+
+<section id="install" class="block">
+  <h2>Install</h2>
+  <p class="intro">Downloads are on the <a href="https://github.com/looting-glass/desktop/releases/latest">latest release</a> page.</p>
+
+  <div class="cards">
+    <article class="card">
+      <h3>Linux</h3>
+      <p>Needs KDE Plasma 6 on Wayland and Qt 6. On Arch / CachyOS, install the runtime libraries
+        (already there on most Plasma desktops):</p>
+      <pre><code>sudo pacman -S --needed qt6-declarative layer-shell-qt kirigami qqc2-desktop-style</code></pre>
+      <p>Download <code>lootingglass-&lt;version&gt;-x86_64.tar.gz</code>, then:</p>
+      <pre><code>tar xzf lootingglass-*-x86_64.tar.gz
+cd lootingglass-*-x86_64
+./install.sh</code></pre>
+      <p class="fine">The release binaries are built on Arch and need a Qt at least that new, so a rolling
+        distro (Arch, CachyOS, EndeavourOS) is the safe bet. Elsewhere, build from source.</p>
+    </article>
+
+    <article class="card">
+      <h3>Arch Linux package</h3>
+      <p>Until <code>lootingglass-bin</code> is on the AUR, build the same package from the repository.
+        It installs through pacman with its dependencies, and <code>pacman -R lootingglass-bin</code> removes it.</p>
+      <pre><code>git clone https://github.com/looting-glass/desktop.git looting-glass
+cd looting-glass/packaging/aur/lootingglass-bin
+makepkg -si</code></pre>
+    </article>
+
+    <article class="card">
+      <h3>Windows <span class="tag tag-poc">experimental</span></h3>
+      <p>Run <code>lootingglass-&lt;version&gt;-windows-x64-setup.exe</code>. It installs for your user only (no admin
+        rights), adds a Start menu entry, can start with Windows and uninstalls from <em>Settings → Apps</em>.
+        Prefer a portable app? Extract the <code>.zip</code> anywhere and run <code>lootingglass.exe</code>.</p>
+      <p>The downloads aren't code-signed yet, so SmartScreen may warn you: click <em>More info → Run anyway</em>.
+        Run the game in <strong>windowed fullscreen</strong>; Windows can't draw the overlay over exclusive fullscreen.</p>
+    </article>
+
+    <article class="card">
+      <h3>From source</h3>
+      <p>Needs Rust (edition 2024), a C++ compiler and the Qt packages above, plus <code>qt6-base</code>.</p>
+      <pre><code>sudo pacman -S --needed rustup qt6-base qt6-declarative \
+    layer-shell-qt kirigami qqc2-desktop-style
+git clone https://github.com/looting-glass/desktop.git looting-glass
+cd looting-glass
+./install.sh</code></pre>
+    </article>
+  </div>
+  <p class="fine"><code>install.sh</code> installs to <code>~/.local/bin/lootingglass</code> with a launcher entry and icon.
+    Start <strong>Looting Glass</strong> from the application launcher; it lives in the system tray.</p>
+</section>
+
+<section id="usage" class="block">
+  <h2>Usage</h2>
+  <ol class="numbered">
+    <li>In the game, hover an item and press <kbd>Ctrl</kbd>+<kbd>D</kbd>.</li>
+    <li>The first time, KDE asks you to confirm the shortcuts and to let Looting Glass control the keyboard,
+      so it can press <kbd>Ctrl</kbd>+<kbd>C</kbd> in the game. Both are remembered.</li>
+    <li>Adjust the filters if you like. The search updates automatically.</li>
+    <li>Press <kbd>Esc</kbd> or <kbd>Space</kbd>, or click back into the game, to close the overlay. To keep it open
+      while you play, click the pin next to ✕: it then stays until you press ✕ or <kbd>Esc</kbd>.</li>
+  </ol>
+
+  <h3 class="sub">Manual price check</h3>
+  <p>Click the tray icon (or <em>Manual check…</em> in its menu), paste the item text and press <strong>Check price</strong>
+    or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>. The results open in the overlay as usual.</p>
+
+  <h3 class="sub">Shortcuts</h3>
+  <table>
+    <thead><tr><th>Action</th><th>Default</th></tr></thead>
+    <tbody>
+      <tr><td>Price check hovered item</td><td><kbd>Ctrl</kbd>+<kbd>D</kbd></td></tr>
+      <tr><td>Switch between PoE 1 and PoE 2</td><td class="muted">unassigned</td></tr>
+      <tr><td>Open settings</td><td class="muted">unassigned</td></tr>
+      <tr><td>Open manual price check</td><td class="muted">unassigned</td></tr>
+      <tr><td>Hide overlay</td><td class="muted">unassigned</td></tr>
+    </tbody>
+  </table>
+  <p>On KDE, change them in <em>System Settings → Shortcuts → Looting Glass</em>. On Windows, type them into
+    Looting Glass's own <em>Settings → Shortcuts</em> (for example <code>Ctrl+Shift+F7</code>).</p>
+
+  <h3 class="sub">Hyprland <span class="tag tag-poc">experimental</span></h3>
+  <p>Hyprland doesn't let apps choose their own keys, so bind them in <code>hyprland.conf</code>:</p>
+  <pre><code>bind = CTRL, D, global, dev.lootingglass.LootingGlass:price-check
+bind = , F7, global, dev.lootingglass.LootingGlass:toggle-game     # optional</code></pre>
+  <p>The shortcut ids are <code>price-check</code>, <code>toggle-game</code>, <code>settings</code>, <code>manual-check</code>
+    and <code>hide-overlay</code>. If a bind does nothing, <code>hyprctl globalshortcuts</code> shows the names your portal registered.</p>
+</section>
+
+<section id="settings" class="block">
+  <h2>Settings</h2>
+  <p>Click the tray icon to open the settings window, or edit <code>~/.config/lootingglass/config.toml</code>
+    (on Windows <code>%APPDATA%\lootingglass\config.toml</code>) by hand:</p>
+  <pre><code>game = "poe1"            <span class="c"># or "poe2"</span>
+contact = ""             <span class="c"># optional, appended to the User-Agent sent to the trade API</span>
+
+[poe1]
+league = "Standard"
+
+[poe2]
+league = "Standard"
+
+[trade]
+status = "online"        <span class="c"># "online", "any", or "securable" (PoE 2 instant buyout)</span>
+stat_tolerance = 10      <span class="c"># % below your roll used as the filter minimum</span>
+max_results = 20
+
+[overlay]
+side = "right"
+margin_top = 80
+margin_side = 24
+width = 380
+max_height = 0           <span class="c"># 0 = fit content</span>
+pinned = false           <span class="c"># true = stay open when clicking the game</span>
+
+[shortcuts]              <span class="c"># Windows only; on Linux shortcuts belong to the desktop</span>
+price_check = "Ctrl+D"</code></pre>
+</section>
+
+<section id="troubleshooting" class="block">
+  <h2>Troubleshooting</h2>
+  <dl class="faq">
+    <dt>The overlay has a title bar or isn't on top.</dt>
+    <dd>Looting Glass has to run as a native Wayland client. It overrides <code>QT_QPA_PLATFORM=xcb</code> for itself,
+      but started with <code>LOOTINGGLASS_ALLOW_X11=1</code> the overlay can't use layer-shell.</dd>
+    <dt>"The game didn't copy anything".</dt>
+    <dd>Make sure the cursor is over an item and that you allowed keyboard control when KDE asked. To reset that
+      permission, delete <code>~/.local/state/lootingglass/remote-desktop.token</code> and restart Looting Glass.</dd>
+    <dt>On Windows, the overlay doesn't show over the game.</dt>
+    <dd>Switch the game to windowed fullscreen (borderless). Exclusive fullscreen hides other windows.</dd>
+    <dt>I need debug output.</dt>
+    <dd>Run <code>RUST_LOG=lootingglass=debug QT_FORCE_STDERR_LOGGING=1 lootingglass</code> in a terminal, and
+      <a href="https://github.com/looting-glass/desktop/issues">open an issue</a> with what it prints.</dd>
+  </dl>
+</section>
+
+</main>
+
+<footer>
+  <p>Looting Glass is a fan-made tool and is not affiliated with or endorsed by Grinding Gear Games.</p>
+  <p>Free software under GPL-3.0-or-later.</p>
+</footer>
+
+</body>
+</html>

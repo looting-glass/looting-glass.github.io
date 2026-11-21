@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Looting Glass for Android</title>
+<meta name="description" content="Price check Path of Exile items on console: photograph the item tooltip on your TV and your phone reads and prices it.">
+<meta property="og:title" content="Looting Glass for Android">
+<meta property="og:description" content="Price check Path of Exile items on console from a photo of your TV.">
+<meta property="og:image" content="img/android/item.png">
+<link rel="icon" href="img/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#top"><img src="img/icon.svg" alt="" width="28" height="28"> Looting Glass <span class="brand-sub">Android</span></a>
+  <nav class="menu" aria-label="Sections">
+    <a href="#how">How it works</a>
+    <a href="#install">Install</a>
+    <a href="#accuracy">Accuracy</a>
+  </nav>
+  <nav class="links" aria-label="Other pages">
+    <a href="index.html">Desktop</a>
+    <a class="gh" href="https://github.com/looting-glass/android" aria-label="Looting Glass for Android on GitHub" title="Source on GitHub">
+      <svg viewBox="0 0 16 16" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+    </a>
+  </nav>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <img class="hero-icon" src="img/icon.svg" alt="" width="96" height="96">
+  <h1>Price check from the couch</h1>
+  <p class="lead">Playing <strong>Path of Exile</strong> or <strong>Path of Exile 2</strong> on a console? Photograph the item
+    tooltip on your TV and your phone reads it and searches the official trade site for the same item.</p>
+  <div class="cta center">
+    <a class="button primary" href="https://github.com/looting-glass/android/releases/latest">Download the APK</a>
+    <a class="button" href="#install">How to install</a>
+  </div>
+  <p class="fine"><span class="tag tag-poc">proof of concept</span> Android 8 or newer, 64-bit phone.</p>
+</section>
+
+<section id="how" class="block">
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li>
+      <img src="img/android/item.png" alt="A phone photo of an Xbox tooltip, read into a PoE 2 item" width="540" height="1055">
+      <h3><span>1</span> Photograph the tooltip</h3>
+      <p>Pick the game, platform and league, tap <strong>Take photo</strong>, zoom in until the tooltip fills the frame, and capture.</p>
+    </li>
+    <li>
+      <img src="img/android/filters.png" alt="Search filters: tap a row to switch it on or off, with min and max" width="540" height="1055">
+      <h3><span>2</span> Tune the filters</h3>
+      <p>The item's mods become search filters, like on the desktop. Tap one to switch it on or off and the search re-runs.</p>
+    </li>
+    <li>
+      <img src="img/android/listings.png" alt="Matching trade listings" width="540" height="1055">
+      <h3><span>3</span> See the listings</h3>
+      <p>The cheapest matching listings from your console's trade realm.</p>
+    </li>
+  </ol>
+  <p class="note">Text recognition runs on the phone, so the photo never leaves it. The trade search uses the same
+    Rust core as the desktop app, with the console realms added.</p>
+</section>
+
+<section id="install" class="block">
+  <h2>Install</h2>
+  <ol class="numbered">
+    <li>On your phone, download the APK from the
+      <a href="https://github.com/looting-glass/android/releases/latest">latest release</a>.</li>
+    <li>Open it, and allow installing from your browser when Android asks.</li>
+    <li>Start <strong>Looting Glass</strong>, pick your game, platform and league, and take a photo.</li>
+  </ol>
+  <p class="fine">The app isn't on Google Play. Android may warn that it comes from an unknown source.</p>
+</section>
+
+<section id="accuracy" class="block">
+  <h2>Accuracy</h2>
+  <p>A mod only counts as read correctly if it gives exactly the same trade search as copying the item in game.</p>
+  <ul class="stats">
+    <li><strong>24 / 25</strong><span>mods read correctly from phone photos of an Xbox on a TV</span></li>
+    <li><strong>93.5%</strong><span>of mods on real PoE 2 screenshots</span></li>
+    <li><strong>98.9%</strong><span>of mods on 21 test tooltips, including simulated TV photos</span></li>
+  </ul>
+  <p class="fine">It's a proof of concept, measured on a small set so far. Photos of more items help:
+    <a href="https://github.com/looting-glass/android/issues">open an issue</a> with a photo and the item's text.</p>
+</section>
+
+</main>
+
+<footer>
+  <p>Looting Glass is a fan-made tool and is not affiliated with or endorsed by Grinding Gear Games.</p>
+  <p>Free software under GPL-3.0-or-later.</p>
+</footer>
+
+</body>
+</html>
