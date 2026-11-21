@@ -15,5 +15,5 @@ changelog and pointing the download buttons at the latest release's files. Previ
 scripts/fetch-images.sh && scripts/build.py && python3 -m http.server -d _site 8765
 ```
 
-Pushing to `main` deploys the site; a weekly run picks up new screenshots and releases from the app
+Pushing to `main` deploys the site; a daily run picks up new screenshots and releases from the app
 repos. Start a run by hand (`gh workflow run Pages`) to show a new release right away.

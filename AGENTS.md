@@ -8,9 +8,9 @@ holds what has to stay true.
 The site must always show the latest release of both apps: the Changelog sections of
 `index.html` and `android.html`, and the download buttons under Install on `index.html`.
 
-- `scripts/build.py` fills both in from the GitHub releases at deploy time. Nothing on the site
-  updates by itself between deploys, so after a release of either app (its release-please PR
-  merges and the release workflow has attached its files), start a deploy:
+- `scripts/build.py` fills both in from the GitHub releases at deploy time, and a daily run
+  deploys, so a release reaches the site within a day. To show it right away, start a deploy
+  once the release workflow has attached its files:
   `gh workflow run Pages --repo looting-glass/looting-glass.github.io`.
 - Then check the live pages (https://looting-glass.github.io/ and `/android.html`): the newest
   version is on top of the changelog and marked Latest, and every download button points at
