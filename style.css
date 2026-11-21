@@ -65,7 +65,7 @@ main, footer { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
 
 /* Hero */
 .hero { text-align: center; padding: 72px 0 48px; }
-.hero-icon { margin: 0 auto 20px; filter: drop-shadow(0 8px 30px rgba(241, 200, 111, 0.25)); }
+.hero-icon { margin: 0 auto 20px; filter: drop-shadow(0 8px 30px rgba(182, 124, 196, 0.3)); }
 .hero h1 { font-size: clamp(36px, 6vw, 56px); letter-spacing: -0.02em; }
 .lead { max-width: 660px; margin: 16px auto 32px; color: var(--muted); font-size: 18px; }
 .lead strong { color: var(--text); font-weight: 600; }
