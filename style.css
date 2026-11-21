@@ -220,18 +220,21 @@ footer p { margin: 4px 0; }
   .lb-prev, .lb-next { top: auto; bottom: 14px; transform: none; }
 }
 
-/* Copy buttons on code blocks (copy.js). */
+/* Copy buttons on code blocks (copy.js): an icon in the corner, like on GitHub. */
 .code { position: relative; }
-.code pre { padding-right: 84px; }
+.code pre { padding-right: 52px; }
 .copy {
   position: absolute; top: 8px; right: 8px;
-  padding: 3px 10px; border-radius: 6px; border: 1px solid var(--line-strong);
-  background: var(--raised); color: var(--muted);
-  font-family: inherit; font-size: 12px; font-weight: 600; line-height: 1.6; cursor: pointer;
+  display: grid; place-items: center; width: 32px; height: 32px; padding: 0;
+  border-radius: 6px; border: 1px solid transparent;
+  background: #111118; color: var(--muted); cursor: pointer;
+  /* Covers text that scrolls under the button: solid to the block edge, a short fade on the left. */
+  box-shadow: 7px 0 0 #111118, -10px 0 10px #111118;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
-.copy:hover { color: var(--text); border-color: var(--link); }
-.copy.done { color: #fff; background: var(--accent); border-color: var(--accent); }
-/* Phones: long commands scroll sideways, so the button gets its own row above them. */
-@media (max-width: 600px) {
-  .code pre { padding-right: 16px; padding-top: 40px; }
-}
+.copy svg { width: 16px; height: 16px; fill: currentColor; }
+.copy .check { display: none; }
+.copy:hover, .copy:focus-visible { color: var(--text); border-color: var(--line-strong); background: var(--raised); }
+.copy.done { color: #7ec27e; border-color: rgba(126, 194, 126, 0.5); }
+.copy.done .icon { display: none; }
+.copy.done .check { display: block; }
