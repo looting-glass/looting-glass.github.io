@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://looting-glass.github.io/sitemap.xml
+
