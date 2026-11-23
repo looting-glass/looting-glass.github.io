@@ -26,6 +26,12 @@ GitHub Flow with squash-merged PRs and Conventional Commit titles (`feat: …`, 
 `ci: …`, `docs: …`), like the app repos. Pushing to `main` deploys. Commit and push when the
 maintainer asks.
 
+## What gets deployed
+
+Only what `FILES` in `scripts/build.py` lists ends up in `_site/` and on the site. Add any new
+top-level file there (`robots.txt`, `sitemap.xml`, a verification file, …) in the same change,
+then check its live URL after the deploy.
+
 ## Looks
 
 Colours come from the app's KDE look (top of `style.css`); keep to them, with the purple accent

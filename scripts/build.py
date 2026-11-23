@@ -23,7 +23,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "_site"
-FILES = ["index.html", "android.html", "style.css", "lightbox.js", "copy.js", "img"]
+# Everything that's deployed. A new top-level file (robots.txt, …) must be listed here.
+FILES = ["index.html", "android.html", "style.css", "lightbox.js", "copy.js", "img", "robots.txt", "sitemap.xml"]
 REPOS = {"desktop": "looting-glass/desktop", "android": "looting-glass/android"}
 PAGES = {"desktop": "index.html", "android": "android.html"}
 # Notes written before the move to the organisation link to the old repos; those redirect, but
