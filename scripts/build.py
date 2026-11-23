@@ -4,6 +4,8 @@
 - The Changelog section of index.html and android.html (`<!-- releases -->`): that app's release
   notes. release-please's own version heading is replaced by ours, and anything after the next
   top-level heading (the Android release's install steps) is left to the release page.
+- sitemap.xml: each page's `<lastmod>` is the newer of its last commit and its app's latest
+  release (the deploy writes that release's changelog and downloads into the page).
 - index.html: download buttons point straight at the latest desktop release's files. In the
   source they link to the latest release page, with the file named by its suffix:
   `href="…" data-asset="windows-x64.zip"`. An empty `<span data-size="…">` gets that file's size
@@ -25,6 +27,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "_site"
 # Everything that's deployed. A new top-level file (robots.txt, …) must be listed here.
 FILES = ["index.html", "android.html", "style.css", "lightbox.js", "copy.js", "img", "robots.txt", "sitemap.xml"]
+SITE_REPO = "looting-glass/looting-glass.github.io"
 REPOS = {"desktop": "looting-glass/desktop", "android": "looting-glass/android"}
 PAGES = {"desktop": "index.html", "android": "android.html"}
 # Notes written before the move to the organisation link to the old repos; those redirect, but
@@ -35,15 +38,47 @@ OLD_LINKS = [
 ]
 
 
-def releases(repo):
-    req = urllib.request.Request(
-        f"https://api.github.com/repos/{repo}/releases?per_page=100",
-        headers={"Accept": "application/vnd.github.html+json"},
-    )
+def api(path, accept="application/vnd.github+json"):
+    req = urllib.request.Request(f"https://api.github.com/{path}", headers={"Accept": accept})
     if token := os.environ.get("GITHUB_TOKEN"):
         req.add_header("Authorization", f"Bearer {token}")
     with urllib.request.urlopen(req, timeout=30) as r:
-        return [x for x in json.load(r) if not x["draft"] and not x["prerelease"]]
+        return json.load(r)
+
+
+def releases(repo):
+    rels = api(f"repos/{repo}/releases?per_page=100", "application/vnd.github.html+json")
+    return [x for x in rels if not x["draft"] and not x["prerelease"]]
+
+
+def last_commit(path):
+    """Day of the last commit to `path` in this repo (the deploy's checkout is shallow, so ask
+    the API rather than git)."""
+    commits = api(f"repos/{SITE_REPO}/commits?path={path}&per_page=1")
+    return commits[0]["commit"]["committer"]["date"][:10] if commits else None
+
+
+def sitemap_dates(text, released):
+    """Fill each `<url>`'s `<lastmod>` from its page's last commit and its app's latest release;
+    a page whose dates can't be fetched keeps the date in the source."""
+    def fill(m):
+        block = m.group(0)
+        loc = re.search(r"<loc>https://[^/]+/([^<]*)</loc>", block)
+        if not loc:
+            return block
+        page = loc.group(1) or "index.html"
+        try:
+            dates = [d for d in (last_commit(page), released.get(page)) if d]
+        except OSError as e:
+            print(f"warning: no lastmod for {page}: {e}", file=sys.stderr)
+            return block
+        if not dates:
+            return block
+        day = max(dates)
+        if "<lastmod>" in block:
+            return re.sub(r"<lastmod>[^<]*</lastmod>", f"<lastmod>{day}</lastmod>", block)
+        return block.replace("</loc>", f"</loc>\n    <lastmod>{day}</lastmod>")
+    return re.sub(r"<url>.*?</url>", fill, text, flags=re.S)
 
 
 def notes(body):
@@ -115,6 +150,7 @@ OUT.mkdir()
 for f in FILES:
     (shutil.copytree if (ROOT / f).is_dir() else shutil.copy)(ROOT / f, OUT / f)
 
+released = {}  # page -> day of its app's latest release
 for name, repo in REPOS.items():
     rels = releases(repo)
     page = OUT / PAGES[name]
@@ -122,3 +158,8 @@ for name, repo in REPOS.items():
     if name == "desktop" and rels:
         text = downloads(text, rels[0])
     page.write_text(text)
+    if rels:
+        released[PAGES[name]] = rels[0]["published_at"][:10]
+
+sitemap = OUT / "sitemap.xml"
+sitemap.write_text(sitemap_dates(sitemap.read_text(), released))
