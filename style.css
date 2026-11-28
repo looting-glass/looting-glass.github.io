@@ -188,9 +188,9 @@ footer p { margin: 4px 0; }
 }
 
 /* Lightbox (lightbox.js): screenshots open full size over a dimmed page. */
-.shots img, .shots-wide img, .steps img { cursor: zoom-in; transition: transform 0.15s, box-shadow 0.15s; }
-.shots img:hover, .shots-wide img:hover, .steps img:hover { transform: translateY(-2px); }
-.shots img:focus-visible, .shots-wide img:focus-visible, .steps img:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+.shots img, .shots-wide img, .steps img, .doc img { cursor: zoom-in; transition: transform 0.15s, box-shadow 0.15s; }
+.shots img:hover, .shots-wide img:hover, .steps img:hover, .doc img:hover { transform: translateY(-2px); }
+.shots img:focus-visible, .shots-wide img:focus-visible, .steps img:focus-visible, .doc img:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
 
 .lightbox {
   width: 100vw; height: 100vh; max-width: none; max-height: none; margin: 0; padding: 0;
@@ -272,3 +272,53 @@ footer p { margin: 4px 0; }
 .older { max-width: 760px; }
 .older summary { cursor: pointer; color: var(--link); margin: 0 0 20px 30px; width: fit-content; }
 .older summary:hover { color: var(--text); }
+
+/* Documentation pages (doc.html, filled in by scripts/docs.py): a sidebar with every page and the
+   current page's sections, next to the page. On narrow screens the sidebar folds into a
+   "Contents" box above the page. */
+.doc-layout {
+  display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px;
+  max-width: 1120px; margin: 0 auto; padding: 40px 16px 0;
+}
+.doc-nav { position: sticky; top: 84px; align-self: start; max-height: calc(100vh - 100px); overflow-y: auto; font-size: 15px; }
+.doc-pages, .doc-pages ul { list-style: none; margin: 0; padding: 0; }
+.doc-pages a { display: block; padding: 4px 12px; border-left: 2px solid var(--line); color: var(--muted); text-decoration: none; }
+.doc-pages a:hover { color: var(--text); border-left-color: var(--line-strong); }
+.doc-pages a[aria-current] { color: var(--text); font-weight: 600; border-left-color: var(--accent); background: var(--accent-soft); }
+.doc-pages ul a { padding-left: 26px; font-size: 14px; }
+.doc-nav-small { display: none; }
+
+main.doc { max-width: 760px; margin: 0; padding: 0; }
+.doc h1 { font-size: clamp(30px, 5vw, 40px); letter-spacing: -0.01em; margin-bottom: 24px; }
+.doc h1::after { content: ""; display: block; width: 40px; height: 3px; margin-top: 12px; border-radius: 2px; background: var(--accent); }
+.doc h2 { font-size: 24px; margin: 44px 0 12px; }
+.doc h3 { font-size: 19px; margin: 32px 0 10px; }
+.doc ul, .doc ol { padding-left: 22px; margin: 0 0 14px; }
+.doc li { margin-bottom: 6px; }
+.doc li::marker { color: var(--accent); }
+.doc table { margin-bottom: 20px; }
+.doc :not(pre) > code { overflow-wrap: anywhere; } /* long paths wrap instead of widening the page */
+.doc td { vertical-align: top; }
+.doc blockquote {
+  margin: 0 0 16px; padding: 12px 16px; border-left: 3px solid var(--gold);
+  background: rgba(241, 200, 111, 0.06); border-radius: 0 8px 8px 0; color: var(--muted);
+}
+.doc blockquote p:last-child { margin-bottom: 0; }
+.doc img { display: inline-block; margin: 8px 12px 16px 0; border-radius: 8px; vertical-align: top; }
+.doc-edit { margin-top: 48px; font-size: 14px; }
+
+/* index.html's Documentation section, filled in from the same page list. */
+.doc-list h3 a { color: var(--text); text-decoration: none; }
+.doc-list h3 a:hover { color: var(--link); }
+
+@media (max-width: 860px) {
+  .doc-layout { grid-template-columns: minmax(0, 1fr); padding-top: 24px; }
+  .doc-nav { display: none; }
+  .doc-nav-small {
+    display: block; margin-bottom: 28px; padding: 10px 14px;
+    background: var(--window); border: 1px solid var(--line); border-radius: 10px;
+  }
+  .doc-nav-small summary { cursor: pointer; font-weight: 600; }
+  .doc-nav-small .doc-pages { margin-top: 10px; }
+  .doc table { display: block; overflow-x: auto; } /* wide tables scroll on their own */
+}

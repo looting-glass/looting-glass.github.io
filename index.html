@@ -42,9 +42,7 @@
   <nav class="menu" aria-label="Sections">
     <a href="#features">Features</a>
     <a href="#install">Install</a>
-    <a href="#usage">Usage</a>
-    <a href="#settings">Settings</a>
-    <a href="#troubleshooting">Troubleshooting</a>
+    <a href="#docs">Docs</a>
     <a href="#changelog">Changelog</a>
   </nav>
   <nav class="links" aria-label="Other pages">
@@ -99,7 +97,7 @@
     <li><h3>Results at a glance</h3><p>Price, item level, listing age and seller, an online/any toggle, and one click to the full search on pathofexile.com.</p></li>
     <li><h3>Mod tiers</h3><p>With advanced item text (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd>) every mod shows its tier and roll range, like "T2 · 50–59", with top-tier rolls highlighted.</p></li>
     <li><h3>Bulk exchange</h3><p>Next to the poe.ninja average, the cheapest offers on the trade site's bulk exchange right now, with stock and the price per unit.</p></li>
-    <li><h3>Map check <span class="tag tag-poc">PoE 1</span></h3><p>A separate hotkey lists a map's mods and colours the ones you marked as deadly or annoying, so you know before you run it.</p></li>
+    <li><h3>Map check <span class="tag tag-poc">PoE 1</span></h3><p>Price-checking a map also lists its mods and colours the ones you marked as deadly or annoying, so you know before you run it.</p></li>
     <li><h3>Manual check</h3><p>Paste item text from a friend or a forum post into a native window and check it without the hotkey.</p></li>
   </ul>
   <div class="shots-wide">
@@ -164,104 +162,15 @@ cd looting-glass
     </article>
   </div>
   <p class="fine"><code>install.sh</code> installs to <code>~/.local/bin/lootingglass</code> with a launcher entry and icon.
-    Start <strong>Looting Glass</strong> from the application launcher; it lives in the system tray.</p>
+    Start <strong>Looting Glass</strong> from the application launcher; it lives in the system tray.
+    <a href="docs/install.html">Install</a> has the details, and <a href="docs/usage.html">Usage</a> takes it from there.</p>
 </section>
 
-<section id="usage" class="block">
-  <h2>Usage</h2>
-  <ol class="numbered">
-    <li>In the game, hover an item and press <kbd>Ctrl</kbd>+<kbd>D</kbd>.</li>
-    <li>The first time, KDE asks you to confirm the shortcuts and to let Looting Glass control the keyboard,
-      so it can press <kbd>Ctrl</kbd>+<kbd>C</kbd> in the game. Both are remembered.</li>
-    <li>Adjust the filters if you like. The search updates automatically.</li>
-    <li>Press <kbd>Esc</kbd> or <kbd>Space</kbd>, or click back into the game, to close the overlay. To keep it open
-      while you play, click the pin next to ✕: it then stays until you press ✕ or <kbd>Esc</kbd>.</li>
-  </ol>
-
-  <h3 class="sub">Manual price check</h3>
-  <p>Click the tray icon (or <em>Manual check…</em> in its menu), paste the item text and press <strong>Check price</strong>
-    or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>. The results open in the overlay as usual.</p>
-
-  <h3 class="sub">Map check <span class="tag tag-poc">PoE 1</span></h3>
-  <p>Assign the <em>Map check</em> shortcut, hover a map and press it. The overlay lists the map's mods: click one to mark it
-    annoying, again for deadly, and once more to clear it. Marks cover every roll of a mod, so the next map with a mod you can't
-    run shows it in red right away. <em>Settings → Maps</em> lists the marks; <em>Settings → Game</em> turns the check off.</p>
-
-  <h3 class="sub">Shortcuts</h3>
-  <table>
-    <thead><tr><th>Action</th><th>Default</th></tr></thead>
-    <tbody>
-      <tr><td>Price check hovered item</td><td><kbd>Ctrl</kbd>+<kbd>D</kbd></td></tr>
-      <tr><td>Switch between PoE 1 and PoE 2</td><td class="muted">unassigned</td></tr>
-      <tr><td>Open settings</td><td class="muted">unassigned</td></tr>
-      <tr><td>Open manual price check</td><td class="muted">unassigned</td></tr>
-      <tr><td>Hide overlay</td><td class="muted">unassigned</td></tr>
-      <tr><td>Open hovered item on poedb or the wiki</td><td class="muted">unassigned</td></tr>
-      <tr><td>Map check: hovered map's mods</td><td class="muted">unassigned</td></tr>
-    </tbody>
-  </table>
-  <p>On KDE, change them in <em>System Settings → Shortcuts → Looting Glass</em>. On Windows, type them into
-    Looting Glass's own <em>Settings → Shortcuts</em> (for example <code>Ctrl+Shift+F7</code>).</p>
-
-  <h3 class="sub">Hyprland <span class="tag tag-poc">experimental</span></h3>
-  <p>Hyprland doesn't let apps choose their own keys, so bind them in <code>hyprland.conf</code>:</p>
-  <pre><code>bind = CTRL, D, global, dev.lootingglass.LootingGlass:price-check
-bind = , F7, global, dev.lootingglass.LootingGlass:toggle-game     # optional</code></pre>
-  <p>The shortcut ids are <code>price-check</code>, <code>toggle-game</code>, <code>settings</code>, <code>manual-check</code>,
-    <code>hide-overlay</code>, <code>item-info</code> and <code>map-check</code>. If a bind does nothing, <code>hyprctl globalshortcuts</code> shows the names your portal registered.</p>
-</section>
-
-<section id="settings" class="block">
-  <h2>Settings</h2>
-  <p>Click the tray icon to open the settings window, or edit <code>~/.config/lootingglass/config.toml</code>
-    (on Windows <code>%APPDATA%\lootingglass\config.toml</code>) by hand:</p>
-  <pre><code>game = "poe1"            <span class="c"># or "poe2"</span>
-contact = ""             <span class="c"># optional, appended to the User-Agent sent to the trade API</span>
-
-[poe1]
-league = "Standard"
-
-[poe2]
-league = "Standard"
-
-[trade]
-status = "online"        <span class="c"># "online", "any", or "securable" (PoE 2 instant buyout)</span>
-stat_tolerance = 10      <span class="c"># % below your roll used as the filter minimum</span>
-min_from_tier = false    <span class="c"># with Ctrl+Alt+C text: minimum = bottom of the mod's tier range</span>
-max_results = 20
-
-[map_check]              <span class="c"># PoE 1 maps</span>
-enabled = true
-deadly = ["Monsters reflect #% of Elemental Damage"]   <span class="c"># mod text, numbers as #</span>
-annoying = []
-
-[overlay]
-side = "right"
-margin_top = 80
-margin_side = 24
-width = 380
-max_height = 0           <span class="c"># 0 = fit content</span>
-pinned = false           <span class="c"># true = stay open when clicking the game</span>
-
-[shortcuts]              <span class="c"># Windows only; on Linux shortcuts belong to the desktop</span>
-price_check = "Ctrl+D"</code></pre>
-</section>
-
-<section id="troubleshooting" class="block">
-  <h2>Troubleshooting</h2>
-  <dl class="faq">
-    <dt>The overlay has a title bar or isn't on top.</dt>
-    <dd>Looting Glass has to run as a native Wayland client. It overrides <code>QT_QPA_PLATFORM=xcb</code> for itself,
-      but started with <code>LOOTINGGLASS_ALLOW_X11=1</code> the overlay can't use layer-shell.</dd>
-    <dt>"The game didn't copy anything".</dt>
-    <dd>Make sure the cursor is over an item and that you allowed keyboard control when KDE asked. To reset that
-      permission, delete <code>~/.local/state/lootingglass/remote-desktop.token</code> and restart Looting Glass.</dd>
-    <dt>On Windows, the overlay doesn't show over the game.</dt>
-    <dd>Switch the game to windowed fullscreen (borderless). Exclusive fullscreen hides other windows.</dd>
-    <dt>I need debug output.</dt>
-    <dd>Run <code>RUST_LOG=lootingglass=debug QT_FORCE_STDERR_LOGGING=1 lootingglass</code> in a terminal, and
-      <a href="https://github.com/looting-glass/desktop/issues">open an issue</a> with what it prints.</dd>
-  </dl>
+<section id="docs" class="block">
+  <h2>Documentation</h2>
+  <p class="intro">How to use, set up and troubleshoot Looting Glass. The pages live in the
+    <a href="https://github.com/looting-glass/desktop/tree/main/docs">desktop repository</a>, next to the code they describe.</p>
+<!-- docs -->
 </section>
 
 <section id="changelog" class="block">

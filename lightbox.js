@@ -2,7 +2,7 @@
 // screenshots on the page; Esc, the ✕ or a click outside the image closes it. Without
 // JavaScript the page simply shows the thumbnails.
 (() => {
-  const shots = [...document.querySelectorAll(".shots img, .shots-wide img, .steps img")];
+  const shots = [...document.querySelectorAll(".shots img, .shots-wide img, .steps img, .doc img")];
   if (!shots.length || !window.HTMLDialogElement) return;
 
   const box = document.createElement("dialog");

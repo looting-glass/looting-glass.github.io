@@ -10,6 +10,9 @@
   source they link to the latest release page, with the file named by its suffix:
   `href="…" data-asset="windows-x64.zip"`. An empty `<span data-size="…">` gets that file's size
   and an empty `<span data-version>` the version.
+- docs/: the desktop app's user guide, rendered by docs.py, with its pages listed on index.html
+  (`<!-- docs -->`) and in sitemap.xml (`<!-- docs -->`, dated by each page's last commit there).
+  Set LOOTINGGLASS_DOCS=../desktop/docs to build from a local checkout instead.
 
 Run scripts/fetch-images.sh first. Set GITHUB_TOKEN to avoid the API's anonymous rate limit.
 """
@@ -23,9 +26,12 @@ import sys
 import urllib.request
 from pathlib import Path
 
+import docs
+
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "_site"
-# Everything that's deployed. A new top-level file (robots.txt, …) must be listed here.
+# Everything that's deployed besides the generated docs/. A new top-level file (robots.txt, …)
+# must be listed here. doc.html isn't: it's the docs pages' template.
 FILES = ["index.html", "android.html", "style.css", "lightbox.js", "copy.js", "img", "robots.txt", "sitemap.xml"]
 SITE_REPO = "looting-glass/looting-glass.github.io"
 REPOS = {"desktop": "looting-glass/desktop", "android": "looting-glass/android"}
@@ -51,10 +57,10 @@ def releases(repo):
     return [x for x in rels if not x["draft"] and not x["prerelease"]]
 
 
-def last_commit(path):
-    """Day of the last commit to `path` in this repo (the deploy's checkout is shallow, so ask
-    the API rather than git)."""
-    commits = api(f"repos/{SITE_REPO}/commits?path={path}&per_page=1")
+def last_commit(repo, path):
+    """Day of the last commit to `path` in `repo` (the deploy's checkout is shallow, so ask the
+    API rather than git)."""
+    commits = api(f"repos/{repo}/commits?path={path}&per_page=1")
     return commits[0]["commit"]["committer"]["date"][:10] if commits else None
 
 
@@ -68,7 +74,7 @@ def sitemap_dates(text, released):
             return block
         page = loc.group(1) or "index.html"
         try:
-            dates = [d for d in (last_commit(page), released.get(page)) if d]
+            dates = [d for d in (last_commit(SITE_REPO, page), released.get(page)) if d]
         except OSError as e:
             print(f"warning: no lastmod for {page}: {e}", file=sys.stderr)
             return block
@@ -79,6 +85,15 @@ def sitemap_dates(text, released):
             return re.sub(r"<lastmod>[^<]*</lastmod>", f"<lastmod>{day}</lastmod>", block)
         return block.replace("</loc>", f"</loc>\n    <lastmod>{day}</lastmod>")
     return re.sub(r"<url>.*?</url>", fill, text, flags=re.S)
+
+
+def doc_dates(guide):
+    """Day of each docs page's last commit in the desktop repo; none when the API fails."""
+    try:
+        return {p.source: last_commit(docs.REPO, f"docs/{p.source}") for p in guide}
+    except OSError as e:
+        print(f"warning: no lastmod for the docs: {e}", file=sys.stderr)
+        return {}
 
 
 def notes(body):
@@ -161,5 +176,10 @@ for name, repo in REPOS.items():
     if rels:
         released[PAGES[name]] = rels[0]["published_at"][:10]
 
+guide = docs.build(OUT / "docs", ROOT / "doc.html", docs.reader())
+index = OUT / PAGES["desktop"]
+index.write_text(index.read_text().replace("<!-- docs -->", docs.overview(guide)))
+
 sitemap = OUT / "sitemap.xml"
-sitemap.write_text(sitemap_dates(sitemap.read_text(), released))
+text = sitemap_dates(sitemap.read_text(), released)
+sitemap.write_text(text.replace("<!-- docs -->", docs.sitemap(guide, doc_dates(guide))))
