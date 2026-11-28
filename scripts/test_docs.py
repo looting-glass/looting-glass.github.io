@@ -91,6 +91,19 @@ class Sidebar(unittest.TestCase):
                                '<ul><li><a href="#map-check">Map check</a></li></ul></li></ol>')
 
 
+class Overview(unittest.TestCase):
+    def test_cards_for_the_listed_pages_only(self):
+        guide = docs.pages(INDEX)
+        self.assertEqual(docs.overview(guide, "docs/"), '<ul class="features doc-list">\n'
+                         '<li><h3><a href="docs/install.html">Install</a></h3>'
+                         '<p>requirements and the downloads.</p></li>\n'
+                         '<li><h3><a href="docs/configuration.html">Configuration</a></h3>'
+                         '<p>the settings window and <code>config.toml</code>.</p></li>\n</ul>')
+
+    def test_links_relative_to_the_page_they_are_on(self):
+        self.assertIn('href="install.html"', docs.overview(docs.pages(INDEX), ""))
+
+
 class Sitemap(unittest.TestCase):
     def test_one_url_per_page_dated_when_known(self):
         guide = [Page("README.md", "Overview"), Page("usage.md", "Usage")]

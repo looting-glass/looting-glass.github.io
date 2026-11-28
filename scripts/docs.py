@@ -113,9 +113,10 @@ def sidebar(guide, current, headings):
     return '<ol class="doc-pages">' + "".join(items) + "</ol>"
 
 
-def overview(guide):
-    """The Documentation section of index.html: each listed page with its blurb."""
-    items = [f'<li><h3><a href="docs/{p.url}">{html.escape(p.title)}</a></h3>'
+def overview(guide, base):
+    """Each listed page with its blurb, as cards: on the docs' own overview page (`base` "") and
+    in the Documentation section of index.html (`base` "docs/")."""
+    items = [f'<li><h3><a href="{base}{p.url}">{html.escape(p.title)}</a></h3>'
              f"{markdown.markdown(p.blurb)}</li>" for p in guide if p.source != INDEX]
     return '<ul class="features doc-list">\n' + "\n".join(items) + "\n</ul>"
 
@@ -144,8 +145,11 @@ def reader():
 def build(out, template, read):
     """Renders every listed page into `out` with `template`, and copies the images they show.
     Returns the pages, in order."""
-    guide = pages(read(INDEX).decode())
-    rendered = {p.source: render(read(p.source).decode()) for p in guide}
+    index = read(INDEX).decode()
+    guide = pages(index)
+    # The overview's list of pages is shown as cards instead, added after rendering.
+    rendered = {p.source: render(ENTRY.sub("", index) if p.source == INDEX else read(p.source).decode())
+                for p in guide}
     urls = {p.source: p.url for p in guide}
     anchors = {source: {i for _, i, _ in r[2]} for source, r in rendered.items()}
     layout = Template(template.read_text())
@@ -153,6 +157,8 @@ def build(out, template, read):
     for p in guide:
         body, title, headings = rendered[p.source]
         body, images, warnings = relink(body, p.source, urls, anchors)
+        if p.source == INDEX:
+            body += "\n" + overview(guide, "")
         for w in warnings:
             print(f"warning: {w}", file=sys.stderr)
         for image in images:

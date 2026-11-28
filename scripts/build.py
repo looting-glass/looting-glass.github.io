@@ -178,7 +178,7 @@ for name, repo in REPOS.items():
 
 guide = docs.build(OUT / "docs", ROOT / "doc.html", docs.reader())
 index = OUT / PAGES["desktop"]
-index.write_text(index.read_text().replace("<!-- docs -->", docs.overview(guide)))
+index.write_text(index.read_text().replace("<!-- docs -->", docs.overview(guide, "docs/")))
 
 sitemap = OUT / "sitemap.xml"
 text = sitemap_dates(sitemap.read_text(), released)
