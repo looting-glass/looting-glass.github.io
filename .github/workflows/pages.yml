@@ -2,7 +2,8 @@ name: Pages
 
 # Publishes the site to https://looting-glass.github.io/. Screenshots and the icon are fetched
 # from the desktop and android repos at deploy time; the changelog and the download links come
-# from their releases. The daily run picks up new screenshots and releases.
+# from their releases, and the docs pages from the desktop repo's docs/. The daily run picks up
+# new screenshots, docs and releases.
 on:
   workflow_dispatch:
   push:
@@ -28,6 +29,11 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.x"
+      - run: pip install -r scripts/requirements.txt
+      - run: python -m unittest discover scripts
       - run: scripts/fetch-images.sh
       - run: scripts/build.py
         env:

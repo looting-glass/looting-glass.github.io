@@ -28,9 +28,19 @@ maintainer asks.
 
 ## What gets deployed
 
-Only what `FILES` in `scripts/build.py` lists ends up in `_site/` and on the site. Add any new
-top-level file there (`robots.txt`, `sitemap.xml`, a verification file, …) in the same change,
-then check its live URL after the deploy.
+Only what `FILES` in `scripts/build.py` lists ends up in `_site/` and on the site, plus the
+generated `docs/` pages. Add any new top-level file there (`robots.txt`, `sitemap.xml`, a
+verification file, …) in the same change, then check its live URL after the deploy. `doc.html`
+is the docs pages' template, so it isn't listed.
+
+## Docs
+
+The desktop app's documentation lives in its repo's `docs/`, next to the code, and is the only
+copy: `scripts/docs.py` renders it at deploy time, in the order `docs/README.md` lists the pages,
+and fills in the Documentation section of `index.html` and the docs' `sitemap.xml` entries from
+the same list. Don't write user-guide content into `index.html`; change the page in the desktop
+repo and start a Pages run. After a run, check that `/docs/` lists every page and that the deploy
+log has no "warning:" lines about links.
 
 ## Looks
 
